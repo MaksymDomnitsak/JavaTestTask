@@ -36,6 +36,10 @@ public class DocumentManager {
         Optional<Document> existing = findById(document.getId());
         if (existing.isPresent()) {
             Document docFromStorage = existing.get();
+
+            // Setting an existing field [created], because it means
+            // a time of adding of current document to collection
+            // (like a @CreationTimestamp service field)
             document.setCreated(docFromStorage.getCreated());
             inMemoryCollection.remove(docFromStorage);
         } else {
